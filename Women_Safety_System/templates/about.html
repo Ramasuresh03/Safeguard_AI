@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="page-title">About <span class="pt-highlight">Women Safety</span></h2>
+
+<div class="about-wrapper">
+
+  <!-- ===== SECTION 1: Overview — Indigo/Blue theme ===== -->
+  <div class="about-card ac-blue about-full">
+    <div class="about-card-header">
+      <div class="about-icon-box ib-blue">🛡️</div>
+      <div>
+        <p class="ac-eyebrow">Overview</p>
+        <h3>What is Women Safety System?</h3>
+      </div>
+    </div>
+    <div class="about-divider ad-blue"></div>
+    <p>
+      Women Safety System is an <strong>AI-Powered Women's Safety Framework</strong> that operates
+      <strong>without any human interaction</strong>. Traditional safety devices (panic buttons, apps)
+      require the victim to act — but in a real attack, that's often impossible. Women Safety System solves
+      this by automatically monitoring physiological data (Heart Rate, Motion, Temperature) and instantly
+      alerting a Guardian Dashboard if a threat is detected — <strong>faster than any human can respond.</strong>
+    </p>
+    <div class="ac-stats-row">
+      <div class="ac-stat">
+        <span class="ac-stat-num">5,000+</span>
+        <span class="ac-stat-lbl">Training Scenarios</span>
+      </div>
+      <div class="ac-stat-sep"></div>
+      <div class="ac-stat">
+        <span class="ac-stat-num">0.5s</span>
+        <span class="ac-stat-lbl">Response Time</span>
+      </div>
+      <div class="ac-stat-sep"></div>
+      <div class="ac-stat">
+        <span class="ac-stat-num">3-in-1</span>
+        <span class="ac-stat-lbl">Sensor Fusion</span>
+      </div>
+      <div class="ac-stat-sep"></div>
+      <div class="ac-stat">
+        <span class="ac-stat-num">24/7</span>
+        <span class="ac-stat-lbl">Autonomous Watch</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 2: Two-column ===== -->
+  <div class="about-two-col">
+
+    <!-- Algorithms — Violet theme -->
+    <div class="about-card ac-violet">
+      <div class="about-card-header">
+        <div class="about-icon-box ib-violet">🧠</div>
+        <div>
+          <p class="ac-eyebrow">Machine Learning</p>
+          <h3>Algorithms &amp; Models Used</h3>
+        </div>
+      </div>
+      <div class="about-divider ad-violet"></div>
+      <p>
+        Women Safety System uses a <strong>Random Forest Classifier</strong> — an ensemble ML algorithm that
+        builds multiple Decision Trees and averages them for high accuracy. Instead of relying on a single
+        sensor (which causes false alarms), we use <em>Multi-Sensor Fusion</em>: Heart Rate, Motion Index,
+        and Body Temperature analyzed together for context-aware sensing.
+      </p>
+      <ul class="about-list">
+        <li>
+          <span class="about-tag at-safe">✓ Safe</span>
+          <span>High HR + Rhythmic Motion → Exercise detected</span>
+        </li>
+        <li>
+          <span class="about-tag at-danger">⚠ Danger</span>
+          <span>High HR + Chaotic Motion → Panic detected</span>
+        </li>
+        <li>
+          <span class="about-tag at-warn">↑ Warning</span>
+          <span>Temperature spike → Fight-or-Flight response</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Accuracy — Rose/Coral theme -->
+    <div class="about-card ac-rose">
+      <div class="about-card-header">
+        <div class="about-icon-box ib-rose">📈</div>
+        <div>
+          <p class="ac-eyebrow">Performance</p>
+          <h3>Model Accuracy</h3>
+        </div>
+      </div>
+      <div class="about-divider ad-rose"></div>
+      <p>
+        The Random Forest approach significantly improves detection accuracy while reducing false positives
+        compared to traditional rule-based systems. Trained on a synthetic dataset of
+        <strong>5,000 scenarios</strong> spanning Rest, Exercise, and Panic states, the model reliably
+        distinguishes a gym workout from a genuine attack.
+      </p>
+      <div class="accuracy-bars">
+        <div class="acc-row">
+          <div class="acc-label-row">
+            <span>Detection Accuracy</span><strong>96%</strong>
+          </div>
+          <div class="acc-bar acc-bar-white">
+            <div class="acc-fill af-green" style="width:96%"></div>
+          </div>
+        </div>
+        <div class="acc-row">
+          <div class="acc-label-row">
+            <span>False Positive Rate</span><strong>4%</strong>
+          </div>
+          <div class="acc-bar acc-bar-white">
+            <div class="acc-fill af-red" style="width:4%"></div>
+          </div>
+        </div>
+        <div class="acc-row">
+          <div class="acc-label-row">
+            <span>Response Time</span><strong>&lt; 0.5s</strong>
+          </div>
+          <div class="acc-bar acc-bar-white">
+            <div class="acc-fill af-indigo" style="width:80%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== SECTION 3: Architecture — Teal/Emerald theme ===== -->
+  <div class="about-card ac-teal about-full">
+    <div class="about-card-header">
+      <div class="about-icon-box ib-teal">🏗️</div>
+      <div>
+        <p class="ac-eyebrow">System Design</p>
+        <h3>Technical Architecture — The 3 Layers</h3>
+      </div>
+    </div>
+    <div class="about-divider ad-teal"></div>
+    <div class="arch-grid">
+
+      <div class="arch-layer al-teal">
+        <div class="arch-num an-teal">01</div>
+        <h4>Input Layer</h4>
+        <p class="arch-sub">The Virtual Device</p>
+        <p>A Python Simulator (<code class="code-teal">smart_watch.py</code>) acts as a Smart Watch,
+          generating real-time sensor data (HR, Motion, Temp) and sending it via HTTP POST every second.</p>
+        <div class="arch-tags">
+          <span class="at-teal">Python</span>
+          <span class="at-teal">requests</span>
+          <span class="at-teal">JSON</span>
+        </div>
+      </div>
+
+      <div class="arch-arrow">
+        <div class="arch-arrow-inner">→</div>
+      </div>
+
+      <div class="arch-layer al-teal">
+        <div class="arch-num an-teal">02</div>
+        <h4>Processing Layer</h4>
+        <p class="arch-sub">The AI Brain</p>
+        <p>A Flask server (<code class="code-teal">app.py</code>) hosts the trained Random Forest model.
+          It receives sensor data, runs a prediction, and returns <code class="code-teal">0 (Safe)</code>
+          or <code class="code-teal">1 (Threat)</code> in milliseconds.</p>
+        <div class="arch-tags">
+          <span class="at-teal">Flask</span>
+          <span class="at-teal">scikit-learn</span>
+          <span class="at-teal">joblib</span>
+        </div>
+      </div>
+
+      <div class="arch-arrow">
+        <div class="arch-arrow-inner">→</div>
+      </div>
+
+      <div class="arch-layer al-teal">
+        <div class="arch-num an-teal">03</div>
+        <h4>Application Layer</h4>
+        <p class="arch-sub">Guardian Dashboard</p>
+        <p>A real-time web dashboard polls the server every 0.5s via JavaScript Fetch API, updates live
+          Chart.js graphs, and triggers emergency animations on threat detection.</p>
+        <div class="arch-tags">
+          <span class="at-teal">JavaScript</span>
+          <span class="at-teal">Chart.js</span>
+          <span class="at-teal">CSS3</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== SECTION 4: Tech Stack — Amber/Orange theme ===== -->
+  <div class="about-card ac-amber about-full">
+    <div class="about-card-header">
+      <div class="about-icon-box ib-amber">💻</div>
+      <div>
+        <p class="ac-eyebrow">Stack</p>
+        <h3>Technology Stack</h3>
+      </div>
+    </div>
+    <div class="about-divider ad-amber"></div>
+    <div class="tech-table">
+      <div class="tech-row tr-amber">
+        <div class="tech-left">
+          <span class="tech-dot td-amber"></span>
+          <span class="tech-label">Frontend</span>
+        </div>
+        <span class="tech-value">HTML5, CSS3, JavaScript, Chart.js, Lottie Animations</span>
+      </div>
+      <div class="tech-row tr-amber">
+        <div class="tech-left">
+          <span class="tech-dot td-amber"></span>
+          <span class="tech-label">Backend</span>
+        </div>
+        <span class="tech-value">Python, Flask, REST API</span>
+      </div>
+      <div class="tech-row tr-amber">
+        <div class="tech-left">
+          <span class="tech-dot td-amber"></span>
+          <span class="tech-label">AI / ML</span>
+        </div>
+        <span class="tech-value">scikit-learn (Random Forest), pandas, NumPy, joblib</span>
+      </div>
+      <div class="tech-row tr-amber">
+        <div class="tech-left">
+          <span class="tech-dot td-amber"></span>
+          <span class="tech-label">Data</span>
+        </div>
+        <span class="tech-value">Synthetic Dataset (5,000 rows) — Heart Rate, Motion Index, Temperature</span>
+      </div>
+      <div class="tech-row tr-amber">
+        <div class="tech-left">
+          <span class="tech-dot td-amber"></span>
+          <span class="tech-label">Hardware Sim</span>
+        </div>
+        <span class="tech-value">Python Smart Watch Simulator (HTTP POST → Flask endpoint)</span>
+      </div>
+      <div class="tech-row tr-amber" style="border-bottom:none;">
+        <div class="tech-left">
+          <span class="tech-dot td-amber"></span>
+          <span class="tech-label">Deployment</span>
+        </div>
+        <span class="tech-value">Local / Vercel (Frontend), Python environment (Backend)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 5: Key Highlights — multi-colour cards ===== -->
+  <div class="about-card ac-plain about-full">
+    <div class="about-card-header">
+      <div class="about-icon-box ib-pink">✨</div>
+      <div>
+        <p class="ac-eyebrow">Why it matters</p>
+        <h3>Key Highlights</h3>
+      </div>
+    </div>
+    <div class="about-divider ad-pink"></div>
+    <div class="highlights-grid">
+
+      <div class="highlight-item hi-blue">
+        <span class="hi-icon">🚫</span>
+        <h4>Zero Human Interaction</h4>
+        <p>Works entirely autonomously — no button press needed.</p>
+      </div>
+
+      <div class="highlight-item hi-violet">
+        <span class="hi-icon">✅</span>
+        <h4>False Positive Rejection</h4>
+        <p>Distinguishes gym workouts from genuine panic attacks.</p>
+      </div>
+
+      <div class="highlight-item hi-teal">
+        <span class="hi-icon">⚡</span>
+        <h4>Real-Time Response</h4>
+        <p>Sub-second threat detection and dashboard alerting.</p>
+      </div>
+
+      <div class="highlight-item hi-rose">
+        <span class="hi-icon">🎨</span>
+        <h4>Dynamic UI</h4>
+        <p>Interface physically reacts — screen flashes red on emergency.</p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

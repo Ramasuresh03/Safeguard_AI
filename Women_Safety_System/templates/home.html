@@ -1,0 +1,701 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- ===== STATUS BAR ===== -->
+<div class="super-status" id="riskPanel">
+  <div class="status-item risk">
+    <span id="riskIcon">🟢</span>
+    <div>
+      <small>System Status</small>
+      <div id="riskText">SAFE</div>
+    </div>
+  </div>
+  <div class="status-item">
+    ⌚
+    <div>
+      <small>Local Time</small>
+      <span id="clock">--:--:--</span>
+    </div>
+  </div>
+  <div class="status-item">
+    📍
+    <div>
+      <small>Location</small>
+      <span id="city">Detecting...</span>
+      <small id="coords"></small>
+    </div>
+    <span id="gpsDot" class="dot gray"></span>
+  </div>
+</div>
+
+
+<!-- ===== HERO ===== -->
+<section class="hero-lottie">
+  <div class="hero-text">
+    <p class="hero-eyebrow">AI-Powered Women Safety Framework</p>
+    <h1>Women <span class="hero-highlight">Safety</span><br>Guardian System</h1>
+    <p class="hero-sub">
+      Real-time physiological monitoring, intelligent threat detection,
+      and instant emergency alerts — all without lifting a finger.
+    </p>
+    <div class="hero-tags">
+      <span class="htag">✦ LIVE MONITORING</span>
+      <span class="htag">✦ ML DETECTION</span>
+      <span class="htag">✦ AUTO ALERT</span>
+    </div>
+  </div>
+  <div class="hero-animation">
+    <lottie-player
+      src="{{ url_for('static', filename='lottie/Woman tracked.json') }}"
+      background="transparent" speed="0.5" loop autoplay
+      style="width:100%;height:380px;">
+    </lottie-player>
+  </div>
+</section>
+
+<br>
+<br>
+<!-- ===== BIOMETRIC DATA ===== -->
+<div class="home-section-label">BIOMETRIC DATA</div>
+
+<div class="metrics-grid">
+
+  <!-- Heart Rate -->
+  <div class="metric-card card-hr">
+    <div class="mc-top-bar"></div>
+    <div class="mc-icon-wrap mc-icon-hr">💓</div>
+    <div class="mc-label">Heart Rate</div>
+    <div class="mc-value" id="hr">--&thinsp;<span class="mc-unit">bpm</span></div>
+    <div class="mc-bar-track"><div class="mc-bar-fill mf-hr" id="hrBar"></div></div>
+    <div class="mc-status" id="hrStatus">Awaiting data…</div>
+  </div>
+
+  <!-- Blood Pressure -->
+  <div class="metric-card card-bp">
+    <div class="mc-top-bar"></div>
+    <div class="mc-icon-wrap mc-icon-bp">🩸</div>
+    <div class="mc-label">Blood Pressure</div>
+    <div class="mc-value mc-value-md" id="bp">-- / --</div>
+    <div class="mc-hint">Systolic / Diastolic</div>
+    <div class="mc-status" id="bpStatus">&nbsp;</div>
+  </div>
+
+  <!-- SpO2 -->
+  <div class="metric-card card-spo2">
+    <div class="mc-top-bar"></div>
+    <div class="mc-icon-wrap mc-icon-spo2">🫁</div>
+    <div class="mc-label">SpO2 Oxygen</div>
+    <div class="mc-value" id="spo2">--&thinsp;<span class="mc-unit">%</span></div>
+    <div class="mc-bar-track"><div class="mc-bar-fill mf-spo2" id="spo2Bar"></div></div>
+    <div class="mc-status" id="spo2Status">Awaiting data…</div>
+  </div>
+
+  <!-- Stress Level -->
+  <div class="metric-card card-stress">
+    <div class="mc-top-bar"></div>
+    <div class="mc-icon-wrap mc-icon-stress">🧠</div>
+    <div class="mc-label">Stress Level</div>
+    <div class="mc-value mc-value-md" id="stress">--</div>
+    <div class="mc-status" id="stressSub">Awaiting data…</div>
+  </div>
+
+  <!-- Risk Score -->
+  <div class="metric-card card-risk">
+    <div class="mc-top-bar"></div>
+    <div class="mc-icon-wrap mc-icon-risk">🛡️</div>
+    <div class="mc-label">Risk Score</div>
+    <div class="mc-value mc-value-md" id="risk">--</div>
+    <div class="mc-risk-row">
+      <div class="mc-bar-track mc-bar-wide">
+        <div class="mc-bar-fill mf-risk" id="riskBar"></div>
+      </div>
+      <span class="mc-pct" id="riskScore">0%</span>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ===== TREND ANALYSIS ===== -->
+<div class="home-section-label" style="margin-top:40px;">TREND ANALYSIS</div>
+
+<div class="charts-row">
+  <div class="chart-card">
+    <div class="chart-card-header">
+      <span class="chart-card-title">Heart Rate Trend</span>
+      <span class="chart-live-badge">● LIVE</span>
+    </div>
+    <div class="chart-wrap"><canvas id="hrChart"></canvas></div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-card-header">
+      <span class="chart-card-title">Stress Analysis</span>
+      <span class="chart-live-badge">● LIVE</span>
+    </div>
+    <div class="chart-wrap"><canvas id="stressChart"></canvas></div>
+  </div>
+</div>
+
+
+<!-- ===== FOOTER ===== -->
+<footer class="home-footer">
+  <span class="hf-brand">WOMEN SAFETY</span>
+  <span class="hf-sep">·</span>
+  <span>AI-Powered Safety Framework</span>
+  <span class="hf-sep">·</span>
+  <span>Built with <span class="hf-tag">Python</span> · <span class="hf-tag">Flask</span> · <span class="hf-tag">Machine Learning</span></span>
+</footer>
+
+
+<!-- ===== GUARDIAN POPUP MODAL ===== -->
+<div class="guardian-overlay" id="guardianOverlay" role="dialog" aria-modal="true" aria-labelledby="g-title">
+
+  <div class="guardian-modal">
+    <div class="g-accent-bar"></div>
+    <button class="g-close-x" id="gCloseX" title="Close">✕</button>
+
+    <!-- Header -->
+    <div class="g-header">
+      <div class="g-header-icon">🛡️</div>
+      <div>
+        <div class="g-title" id="g-title">Emergency Guardian</div>
+        <div class="g-subtitle">This person will receive an SMS when Emergency is detected</div>
+      </div>
+    </div>
+
+    <!-- Saved guardian badge (shown when already set) -->
+    <div class="g-saved-badge" id="gSavedBadge">
+      <span class="g-saved-badge-icon">✅</span>
+      <div>
+        <div class="g-saved-name" id="gSavedName">--</div>
+        <div class="g-saved-phone" id="gSavedPhone">--</div>
+      </div>
+      <button class="g-saved-edit" id="gEditBtn">✏️ Edit</button>
+    </div>
+
+    <!-- Form -->
+    <div class="g-form" id="gForm">
+      <div class="g-field">
+        <label class="g-label" for="gNameInput">👤 Guardian Name</label>
+        <input class="g-input" id="gNameInput" type="text"
+               placeholder="e.g. Priya Sharma" autocomplete="name" maxlength="60">
+      </div>
+      <div class="g-field">
+        <label class="g-label" for="gPhoneInput">📱 Phone Number</label>
+        <input class="g-input" id="gPhoneInput" type="tel"
+               placeholder="e.g. +91 98765 43210" autocomplete="tel" maxlength="20">
+      </div>
+    </div>
+
+    <!-- Status message -->
+    <div class="g-status" id="gStatus"></div>
+
+    <!-- Actions -->
+    <div class="g-actions">
+      <button class="g-btn-cancel" id="gCancelBtn">Cancel</button>
+      <button class="g-btn-save"   id="gSaveBtn">💾 Save Guardian</button>
+    </div>
+  </div>
+
+</div><!-- /.guardian-overlay -->
+
+
+<!-- ===== EMERGENCY POPUP MODAL ===== -->
+<div class="emergency-overlay" id="emergencyOverlay" role="dialog" aria-modal="true" aria-labelledby="em-title-text">
+
+  <div class="emergency-modal" id="emergencyModal">
+
+    <!-- Animated scan line at the top -->
+    <div class="em-scan-line"></div>
+
+    <!-- Corner buttons -->
+    <button class="em-mute-btn" id="emMuteBtn" title="Mute alarm">🔔</button>
+    <button class="em-close-x" id="emCloseX" title="Dismiss">✕</button>
+
+    <!-- Header -->
+    <div class="em-header">
+      <span class="em-siren">🚨</span>
+      <div class="em-title-block">
+        <div class="em-title" id="em-title-text">EMERGENCY ALERT</div>
+        <div class="em-subtitle">Threat detected · SMS sent to emergency contact</div>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="em-body">
+
+      <!-- Alert message -->
+      <div class="em-message-box">
+        <div class="em-message-label">📢 Alert Message Sent</div>
+        <div class="em-message-text" id="emAlertMsg">
+          🚨 EMERGENCY ALERT! Please help me — I'm in Danger ⚠️
+        </div>
+      </div>
+
+      <!-- Live biometrics at time of alert -->
+      <div class="em-bio-grid">
+        <div class="em-bio-item">
+          <span class="em-bio-icon">💓</span>
+          <div>
+            <div class="em-bio-label">Heart Rate</div>
+            <div class="em-bio-value" id="emHR">-- bpm</div>
+          </div>
+        </div>
+        <div class="em-bio-item">
+          <span class="em-bio-icon">🩸</span>
+          <div>
+            <div class="em-bio-label">Blood Pressure</div>
+            <div class="em-bio-value" id="emBP">-- / --</div>
+          </div>
+        </div>
+        <div class="em-bio-item">
+          <span class="em-bio-icon">🫁</span>
+          <div>
+            <div class="em-bio-label">SpO2</div>
+            <div class="em-bio-value" id="emSpO2">-- %</div>
+          </div>
+        </div>
+        <div class="em-bio-item">
+          <span class="em-bio-icon">🧠</span>
+          <div>
+            <div class="em-bio-label">Stress Level</div>
+            <div class="em-bio-value" id="emStress">--</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div class="em-location-row">
+        <span class="em-loc-icon">📍</span>
+        <div>
+          <div class="em-loc-label">Last Known Location</div>
+          <div class="em-loc-value" id="emLocation">Detecting location…</div>
+        </div>
+      </div>
+
+      <!-- Timestamp -->
+      <div class="em-timestamp" id="emTimestamp">Alert triggered at --:--:--</div>
+
+    </div><!-- /.em-body -->
+
+    <!-- SMS delivery status -->
+    <div id="emSmsStatus" class="em-sms-status"></div>
+
+    <!-- Action buttons -->
+    <div class="em-actions">
+      <button class="em-btn-dismiss" id="emDismissBtn">✓ Acknowledge</button>
+      <button class="em-btn-sos" id="emSOSBtn">🆘 SEND SOS AGAIN</button>
+    </div>
+
+  </div><!-- /.emergency-modal -->
+</div><!-- /.emergency-overlay -->
+
+
+<!-- ===== SCRIPTS ===== -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/home_dashboard.js') }}"></script>
+<script>
+/* ============================================================
+   CLOCK
+   ============================================================ */
+function updateClock(){
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2,'0');
+  const m = String(now.getMinutes()).padStart(2,'0');
+  const s = String(now.getSeconds()).padStart(2,'0');
+  const c = (now.getSeconds()%2===0) ? ":" : " ";
+  document.getElementById("clock").innerText = `${h}${c}${m}${c}${s}`;
+}
+setInterval(updateClock,1000); updateClock();
+
+/* ============================================================
+   GEOLOCATION  (watchPosition for continuous updates)
+   ============================================================ */
+let cachedLocation = "Location unavailable";
+let cachedCoords   = "";
+let cachedLat      = null;
+let cachedLon      = null;
+let cachedMapsLink = "";
+
+if(navigator.geolocation){
+  navigator.geolocation.watchPosition(async pos=>{
+    cachedLat = pos.coords.latitude;
+    cachedLon = pos.coords.longitude;
+    const lat = cachedLat.toFixed(6);
+    const lon = cachedLon.toFixed(6);
+    cachedCoords   = lat + ", " + lon;
+    cachedMapsLink = "https://maps.google.com/?q=" + lat + "," + lon;
+    document.getElementById("coords").innerText = cachedCoords;
+    document.getElementById("gpsDot").className = "dot green";
+    try {
+      const res = await fetch("https://nominatim.openstreetmap.org/reverse?format=json&lat=" + lat + "&lon=" + lon);
+      const geo = await res.json();
+      const city = geo.address.city || geo.address.town || geo.address.village || "Location found";
+      document.getElementById("city").innerText = city;
+      cachedLocation = city + " (" + cachedCoords + ")";
+    } catch(e){
+      cachedLocation = cachedCoords || "GPS acquired";
+    }
+  }, ()=>{
+    document.getElementById("city").innerText = "Permission denied";
+    document.getElementById("gpsDot").className = "dot red";
+    cachedLocation = "Location permission denied";
+  }, { enableHighAccuracy: true, maximumAge: 10000 });
+}
+
+/* ============================================================
+   EMERGENCY POPUP
+   ============================================================ */
+const overlay     = document.getElementById("emergencyOverlay");
+const muteBtn     = document.getElementById("emMuteBtn");
+const closeXBtn   = document.getElementById("emCloseX");
+const dismissBtn  = document.getElementById("emDismissBtn");
+const sosBtn      = document.getElementById("emSOSBtn");
+
+/* Beep alarm using Web Audio API */
+let alarmCtx = null;
+let alarmNodes = [];
+let alarmMuted = false;
+let alarmRunning = false;
+
+function startAlarm(){
+  if(alarmRunning || alarmMuted) return;
+  try {
+    alarmCtx = new (window.AudioContext || window.webkitAudioContext)();
+    alarmRunning = true;
+    function beep(){
+      if(!alarmRunning || alarmMuted) return;
+      const osc  = alarmCtx.createOscillator();
+      const gain = alarmCtx.createGain();
+      osc.connect(gain); gain.connect(alarmCtx.destination);
+      osc.frequency.setValueAtTime(880, alarmCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(440, alarmCtx.currentTime + 0.25);
+      gain.gain.setValueAtTime(0.4, alarmCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, alarmCtx.currentTime + 0.4);
+      osc.start(alarmCtx.currentTime);
+      osc.stop(alarmCtx.currentTime + 0.45);
+      alarmNodes.push(osc);
+      setTimeout(beep, 700);
+    }
+    beep();
+  } catch(e){ console.warn("Audio:", e); }
+}
+
+function stopAlarm(){
+  alarmRunning = false;
+  alarmNodes.forEach(n=>{ try{ n.stop(); }catch(e){} });
+  alarmNodes = [];
+  if(alarmCtx){ try{ alarmCtx.close(); }catch(e){} alarmCtx = null; }
+}
+
+function toggleMute(){
+  alarmMuted = !alarmMuted;
+  muteBtn.textContent = alarmMuted ? "🔕" : "🔔";
+  muteBtn.title       = alarmMuted ? "Unmute alarm" : "Mute alarm";
+  if(alarmMuted) stopAlarm();
+  else           startAlarm();
+}
+
+/* Fill popup with live biometric snapshot + Maps link */
+function fillPopupData(){
+  const hr     = document.getElementById("hr")?.textContent?.replace(/\s/g,"") || "--";
+  const bp     = document.getElementById("bp")?.textContent || "-- / --";
+  const spo2   = document.getElementById("spo2")?.textContent?.replace(/\s/g,"") || "--";
+  const stress = document.getElementById("stress")?.textContent || "--";
+
+  document.getElementById("emHR").textContent     = hr;
+  document.getElementById("emBP").textContent     = bp;
+  document.getElementById("emSpO2").textContent   = spo2;
+  document.getElementById("emStress").textContent = stress;
+
+  /* Location — plain text + tappable Maps link */
+  const locEl = document.getElementById("emLocation");
+  if(cachedMapsLink){
+    locEl.innerHTML = cachedLocation +
+      " <a href='" + cachedMapsLink + "' target='_blank' " +
+      "style='color:#00c8ff;font-size:11px;margin-left:6px;white-space:nowrap;'>📌 Open in Maps</a>";
+  } else {
+    locEl.textContent = cachedLocation;
+  }
+
+  const now = new Date();
+  const ts  = now.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"})
+            + " · "
+            + String(now.getHours()).padStart(2,"0")
+            + ":" + String(now.getMinutes()).padStart(2,"0")
+            + ":" + String(now.getSeconds()).padStart(2,"0");
+  document.getElementById("emTimestamp").textContent = "⏱ Alert triggered at " + ts;
+
+  /* Build alert message shown in popup */
+  const mapsLine = cachedMapsLink ? ("\n🗺️ Open Maps: " + cachedMapsLink) : "";
+  const msg = "🚨 EMERGENCY ALERT!\nPlease help me — I'm in Danger ⚠️\n📍 Location: " +
+              cachedLocation + mapsLine +
+              "\n💓 Heart Rate: " + hr + " · SpO2: " + spo2 + "\n🧠 Stress: " + stress;
+  document.getElementById("emAlertMsg").textContent = msg;
+}
+
+let popupShown = false;
+
+function showEmergencyPopup(){
+  if(popupShown) return;
+  popupShown = true;
+  alarmMuted = false;
+  muteBtn.textContent = "🔔";
+  fillPopupData();
+  overlay.classList.add("active");
+  document.body.classList.add("modal-open");
+  startAlarm();
+
+  /* Show SMS sending status inside the popup */
+  const smsStatusEl = document.getElementById("emSmsStatus");
+
+  /* ── Check if guardian is set ── */
+  fetch("/guardian")
+    .then(r => r.json())
+    .then(g => {
+      if(!g.phone){
+        if(smsStatusEl){
+          smsStatusEl.textContent = "⚠️ No guardian set — SMS not sent. Set a guardian now!";
+          smsStatusEl.className = "em-sms-status warn";
+        }
+        return;
+      }
+
+      /* Guardian is set — push GPS + biometrics */
+      if(smsStatusEl){
+        smsStatusEl.textContent = "📡 Sending SMS to " + (g.name || g.phone) + "...";
+        smsStatusEl.className = "em-sms-status sending";
+      }
+
+      const hr     = document.getElementById("hr")?.textContent?.replace(/\s/g,"") || "--";
+      const bp     = document.getElementById("bp")?.textContent || "--/--";
+      const spo2   = document.getElementById("spo2")?.textContent?.replace(/\s/g,"") || "--";
+      const stress = document.getElementById("stress")?.textContent || "--";
+
+      fetch("/send-emergency-location", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          lat:        cachedLat,
+          lon:        cachedLon,
+          location:   cachedLocation,
+          maps_link:  cachedMapsLink,
+          heart_rate: hr,
+          bp:         bp,
+          spo2:       spo2,
+          stress:     stress
+        })
+      })
+      .then(r => r.json())
+      .then(res => {
+        if(smsStatusEl){
+          if(res.status === "sent"){
+            smsStatusEl.textContent = "✅ SMS sent to " + (g.name || g.phone) + " with GPS location";
+            smsStatusEl.className = "em-sms-status success";
+          } else if(res.status === "skipped"){
+            smsStatusEl.textContent = "✅ Fallback SMS already sent.";
+            smsStatusEl.className = "em-sms-status success";
+          } else {
+            smsStatusEl.textContent = "❌ SMS failed — check Twilio credentials in app.py";
+            smsStatusEl.className = "em-sms-status error";
+          }
+        }
+      })
+      .catch(e => {
+        console.error("SMS push error:", e);
+        if(smsStatusEl){
+          smsStatusEl.textContent = "❌ Network error — could not reach server";
+          smsStatusEl.className = "em-sms-status error";
+        }
+      });
+    })
+    .catch(e => console.warn("Guardian check failed:", e));
+}
+
+function hideEmergencyPopup(){
+  overlay.classList.remove("active");
+  document.body.classList.remove("modal-open");
+  stopAlarm();
+  /* Allow re-trigger only if risk leaves Emergency then comes back */
+  setTimeout(()=>{ popupShown = false; }, 8000);
+}
+
+/* Button handlers */
+muteBtn.addEventListener("click", toggleMute);
+closeXBtn.addEventListener("click", hideEmergencyPopup);
+dismissBtn.addEventListener("click", hideEmergencyPopup);
+
+sosBtn.addEventListener("click", ()=>{
+  const smsStatusEl = document.getElementById("emSmsStatus");
+  sosBtn.textContent = "⏳ Sending…";
+  sosBtn.disabled = true;
+  const hr     = document.getElementById("hr")?.textContent?.replace(/\s/g,"") || "--";
+  const spo2   = document.getElementById("spo2")?.textContent?.replace(/\s/g,"") || "--";
+  const stress = document.getElementById("stress")?.textContent || "--";
+  const bp     = document.getElementById("bp")?.textContent || "--/--";
+  fetch("/resend-sos", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({
+      lat:        cachedLat,
+      lon:        cachedLon,
+      location:   cachedLocation,
+      maps_link:  cachedMapsLink,
+      heart_rate: hr,
+      bp:         bp,
+      spo2:       spo2,
+      stress:     stress
+    })
+  })
+  .then(r => r.json())
+  .then(res => {
+    if(res.status === "sent"){
+      sosBtn.textContent = "✅ SOS Sent!";
+      if(smsStatusEl){ smsStatusEl.textContent = "✅ SOS resent successfully with GPS location"; smsStatusEl.className = "em-sms-status success"; }
+    } else {
+      sosBtn.textContent = "❌ Failed";
+      if(smsStatusEl){ smsStatusEl.textContent = "❌ SMS failed — check Twilio credentials in app.py"; smsStatusEl.className = "em-sms-status error"; }
+    }
+    setTimeout(()=>{ sosBtn.textContent = "🆘 SEND SOS AGAIN"; sosBtn.disabled = false; }, 3000);
+  })
+  .catch(()=>{
+    sosBtn.textContent = "❌ Network Error";
+    if(smsStatusEl){ smsStatusEl.textContent = "❌ Network error — server unreachable"; smsStatusEl.className = "em-sms-status error"; }
+    setTimeout(()=>{ sosBtn.textContent = "🆘 SEND SOS AGAIN"; sosBtn.disabled = false; }, 3000);
+  });
+});
+
+/* Close on overlay click (outside modal) */
+overlay.addEventListener("click", e=>{
+  if(e.target === overlay) hideEmergencyPopup();
+});
+
+/* Expose for home_dashboard.js to call */
+window.showEmergencyPopup = showEmergencyPopup;
+window.hideEmergencyPopup = hideEmergencyPopup;
+window.resetEmergencyPopup = ()=>{ popupShown = false; };
+
+/* ============================================================
+   GUARDIAN POPUP
+   ============================================================ */
+const gOverlay   = document.getElementById("guardianOverlay");
+const gCloseX    = document.getElementById("gCloseX");
+const gCancelBtn = document.getElementById("gCancelBtn");
+const gSaveBtn   = document.getElementById("gSaveBtn");
+const gEditBtn   = document.getElementById("gEditBtn");
+const gNameInput = document.getElementById("gNameInput");
+const gPhoneInput= document.getElementById("gPhoneInput");
+const gStatus    = document.getElementById("gStatus");
+const gSavedBadge= document.getElementById("gSavedBadge");
+const gForm      = document.getElementById("gForm");
+const guardianNavBtn   = document.getElementById("guardianNavBtn");
+const guardianNavLabel = document.getElementById("guardianNavLabel");
+
+function showGuardianStatus(msg, type){
+  gStatus.textContent = msg;
+  gStatus.className = "g-status " + type;
+  setTimeout(()=>{ gStatus.className = "g-status"; }, 3500);
+}
+
+function updateNavBtn(name, phone){
+  if(name && phone){
+    guardianNavBtn.classList.remove("unset");
+    guardianNavLabel.textContent = "👤 " + name;
+  } else {
+    guardianNavBtn.classList.add("unset");
+    guardianNavLabel.textContent = "Set Guardian";
+  }
+}
+
+function showSavedState(name, phone){
+  document.getElementById("gSavedName").textContent  = name;
+  document.getElementById("gSavedPhone").textContent = phone;
+  gSavedBadge.classList.add("show");
+  gForm.style.display = "none";
+  gSaveBtn.textContent = "✅ Saved";
+  gSaveBtn.disabled = true;
+  setTimeout(()=>{ gSaveBtn.textContent = "💾 Save Guardian"; gSaveBtn.disabled = false; }, 2000);
+}
+
+function showEditState(){
+  gSavedBadge.classList.remove("show");
+  gForm.style.display = "block";
+  gSaveBtn.textContent = "💾 Save Guardian";
+  gSaveBtn.disabled = false;
+}
+
+/* Load guardian from server on page load */
+(async function loadGuardian(){
+  try {
+    const res  = await fetch("/guardian");
+    const data = await res.json();
+    if(data.name && data.phone){
+      gNameInput.value  = data.name;
+      gPhoneInput.value = data.phone;
+      updateNavBtn(data.name, data.phone);
+    }
+  } catch(e){}
+})();
+
+/* Open popup */
+guardianNavBtn.addEventListener("click", ()=>{
+  /* Show saved badge if guardian already set */
+  const n = gNameInput.value.trim();
+  const p = gPhoneInput.value.trim();
+  if(n && p) showSavedState(n, p);
+  else        showEditState();
+  gStatus.className = "g-status";
+  gOverlay.classList.add("active");
+  document.body.classList.add("modal-open");
+});
+
+/* Edit button (in badge) */
+gEditBtn.addEventListener("click", showEditState);
+
+/* Close helpers */
+function closeGuardian(){
+  gOverlay.classList.remove("active");
+  document.body.classList.remove("modal-open");
+}
+gCloseX.addEventListener("click", closeGuardian);
+gCancelBtn.addEventListener("click", closeGuardian);
+gOverlay.addEventListener("click", e=>{ if(e.target===gOverlay) closeGuardian(); });
+
+/* Save */
+gSaveBtn.addEventListener("click", async ()=>{
+  const name  = gNameInput.value.trim();
+  const phone = gPhoneInput.value.trim();
+
+  if(!name){
+    showGuardianStatus("⚠️ Please enter the guardian name.", "error"); return;
+  }
+  if(!phone || !/^[+\d][\d\s\-().]{6,19}$/.test(phone)){
+    showGuardianStatus("⚠️ Please enter a valid phone number.", "error"); return;
+  }
+
+  gSaveBtn.textContent = "⏳ Saving…";
+  gSaveBtn.disabled = true;
+
+  try {
+    const res  = await fetch("/guardian", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, phone })
+    });
+    const data = await res.json();
+
+    if(data.status === "saved"){
+      showGuardianStatus("✅ Guardian saved! SMS alerts will go to " + name + ".", "success");
+      updateNavBtn(name, phone);
+      setTimeout(()=>{ showSavedState(name, phone); }, 1200);
+    } else {
+      showGuardianStatus("❌ Error: " + (data.error||"Unknown error"), "error");
+      gSaveBtn.textContent = "💾 Save Guardian"; gSaveBtn.disabled = false;
+    }
+  } catch(e){
+    showGuardianStatus("❌ Network error. Please try again.", "error");
+    gSaveBtn.textContent = "💾 Save Guardian"; gSaveBtn.disabled = false;
+  }
+});
+</script>
+{% endblock %}

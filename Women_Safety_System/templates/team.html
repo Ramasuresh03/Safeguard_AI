@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="team-page-wrap">
+
+  <!-- Header -->
+  <div class="tp-header">
+    <p class="tp-eyebrow">THE PEOPLE BEHIND IT</p>
+    <h2 class="tp-title">Meet Our <span class="tp-title-glow">Team</span></h2>
+    <p class="tp-subtitle">5 passionate engineers who built an AI-powered women's safety system from scratch — in one semester.</p>
+  </div>
+
+  <!-- ── LEAD CARD ── -->
+  <div class="tc-lead-card">
+    <div class="tc-lead-left">
+      <div class="tc-lead-avatar-frame">
+        <img src="{{ url_for('static', filename='images/Yashwitha.jpeg') }}" alt="S. Yashwitha" class="tc-lead-img">
+        <!--<div class="tc-lead-avatar-ring"></div>-->
+        <div class="tc-online-dot"></div>
+      </div>
+    </div>
+
+    <div class="tc-lead-right">
+      <div class="tc-lead-crown">👑 Team Lead</div>
+      <h3 class="tc-lead-name">S. Yashwitha</h3>
+      <p class="tc-lead-roll">Roll No: 22A31A1224</p>
+      <span class="tc-lead-role">Backend Developer · AI Architect</span>
+      <p class="tc-lead-bio">Designed the complete Women Safety SafeGuard-AI — from training the Random Forest classifier on 5,000+ biometric scenarios to building the Flask REST API that connects real-time smart watch data to the Guardian Dashboard.</p>
+      <div class="tc-skill-row">
+        <span>Python</span><span>Flask</span><span>scikit-learn</span><span>ML</span>
+      </div>
+    </div>
+
+    <div class="tc-lead-decor">
+      <div class="tc-lead-number">01</div>
+    </div>
+  </div>
+
+  <!-- ── 4 MEMBER CARDS ── -->
+  <div class="tc-members-grid">
+
+    <div class="tc-member-card">
+      <div class="tc-mc-top-bar tc-bar-violet"></div>
+      <div class="tc-mc-num">02</div>
+      <div class="tc-mc-avatar-wrap tc-av-violet">
+        <img src="{{ url_for('static', filename='images/Ramasuresh.jpg') }}" alt="M. Ramasuresh" class="tc-mc-img">
+      </div>
+      <div class="tc-mc-body">
+        <span class="tc-mc-role tc-role-violet">Frontend Developer</span>
+        <h3 class="tc-mc-name">M. Ramasuresh</h3>
+        <p class="tc-mc-roll">23A35A1203</p>
+        <p class="tc-mc-bio">Designed the responsive Guardian Dashboard — live biometric cards, animated Chart.js trends, and the real-time risk alert system with full-screen emergency mode.</p>
+        <div class="tc-mc-skills"><span>HTML/CSS</span><span>JavaScript</span><span>Chart.js</span></div>
+      </div>
+    </div>
+
+    <div class="tc-member-card">
+      <div class="tc-mc-top-bar tc-bar-teal"></div>
+      <div class="tc-mc-num">03</div>
+      <div class="tc-mc-avatar-wrap tc-av-teal">
+        <img src="{{ url_for('static', filename='images/Surya.jpeg') }}" alt="O. Surya Prakash" class="tc-mc-img">
+      </div>
+      <div class="tc-mc-body">
+        <span class="tc-mc-role tc-role-teal">QA &amp; Tester</span>
+        <h3 class="tc-mc-name">O. Surya Prakash</h3>
+        <p class="tc-mc-roll">22A31A1254</p>
+        <p class="tc-mc-bio">Validated every edge case — ensuring the model correctly distinguishes a gym workout from a genuine panic event, with zero false emergencies during testing.</p>
+        <div class="tc-mc-skills"><span>Testing</span><span>QA</span><span>Debugging</span></div>
+      </div>
+    </div>
+
+    <div class="tc-member-card">
+      <div class="tc-mc-top-bar tc-bar-rose"></div>
+      <div class="tc-mc-num">04</div>
+      <div class="tc-mc-avatar-wrap tc-av-rose">
+        <img src="{{ url_for('static', filename='images/srirampic.jpeg') }}" alt="R. Sriram" class="tc-mc-img">
+      </div>
+      <div class="tc-mc-body">
+        <span class="tc-mc-role tc-role-rose">Backend Developer</span>
+        <h3 class="tc-mc-name">R. Sriram</h3>
+        <p class="tc-mc-roll">22A31A1256</p>
+        <p class="tc-mc-bio">Built Flask REST endpoints, managed the data pipeline between the smart watch simulator and live dashboard, and implemented the Twilio SMS emergency alert system.</p>
+        <div class="tc-mc-skills"><span>Flask</span><span>Python</span></div>
+      </div>
+    </div>
+
+    <div class="tc-member-card">
+      <div class="tc-mc-top-bar tc-bar-amber"></div>
+      <div class="tc-mc-num">05</div>
+      <div class="tc-mc-avatar-wrap tc-av-amber">
+        <img src="{{ url_for('static', filename='images/Dinnu.jpeg') }}" alt="M. Dinnu" class="tc-mc-img">
+      </div>
+      <div class="tc-mc-body">
+        <span class="tc-mc-role tc-role-amber">Data &amp; Preprocessing</span>
+        <h3 class="tc-mc-name">M. Dinnu</h3>
+        <p class="tc-mc-roll">22A31A1253</p>
+        <p class="tc-mc-bio">Generated and curated the 5,000-row synthetic biometric dataset covering Resting, Exercise, and Panic states with realistic physiological value distributions.</p>
+        <div class="tc-mc-skills"><span>pandas</span><span>NumPy</span><span>Excel</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Stats bar -->
+  <div class="tp-stats-bar">
+    <div class="tp-stat"><span class="tp-stat-n">5</span><span class="tp-stat-l">Team Members</span></div>
+    <div class="tp-stat-div"></div>
+    <div class="tp-stat"><span class="tp-stat-n">1</span><span class="tp-stat-l">Semester</span></div>
+    <div class="tp-stat-div"></div>
+    <div class="tp-stat"><span class="tp-stat-n">5K+</span><span class="tp-stat-l">Training Samples</span></div>
+    <div class="tp-stat-div"></div>
+    <div class="tp-stat"><span class="tp-stat-n">96%</span><span class="tp-stat-l">ML Accuracy</span></div>
+    <div class="tp-stat-div"></div>
+    <div class="tp-stat"><span class="tp-stat-n">0.5s</span><span class="tp-stat-l">Response Time</span></div>
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Smart Watch Simulator</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/smartwatch.jpg') }}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+
+    <div class="nav-logo">SMARTWATCH SIMULATOR</div>
+
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+    </ul>
+
+</nav>
+
+
+
+
+
+<!-- INTRO SECTION -->
+<section class="intro">
+
+<lottie-player
+src="{{ url_for('static', filename='lottie/smartwatch.json') }}"
+background="transparent"
+speed="0.75"
+loop
+autoplay>
+</lottie-player>
+
+
+<p class="heading">
+It's a Real-time health monitoring and stress prediction and generator system.
+<br>Click below to launch your Smart Watch Simulator.
+</p>
+
+<button class="start-btn" onclick="scrollToSim()">Launch Simulator ↓</button>
+
+</section>
+
+
+<!-- SMARTWATCH SECTION -->
+<div id="simulator" class="watch">
+
+<div class="clock" id="clock">--:--:--</div>
+<h2>SMART WATCH SIMULATOR</h2>
+
+<div class="vitals">
+<p id="hr">❤️ Heart Rate: -- bpm</p>
+<p id="bp">🩸 Blood Pressure: --/--</p>
+<p id="spo2">🫁 SpO₂: --%</p>
+<p id="stress">😌 Stress: --</p>
+</div>
+
+<div class="charts">
+
+<div class="chart-container">
+<h3>Heart Rate</h3>
+<canvas id="hrChart"></canvas>
+</div>
+
+<div class="chart-container">
+<h3>SpO₂</h3>
+<canvas id="spo2Chart"></canvas>
+</div>
+
+</div>
+</div>
+
+
+<!-- SCROLL UP BUTTON -->
+<button class="top-btn" id="topBtn" onclick="scrollTopPage()">↑</button>
+
+
+<script>
+
+/* SCROLL DOWN */
+function scrollToSim(){
+document.getElementById("simulator").scrollIntoView({behavior:"smooth"});
+}
+
+/* SCROLL UP */
+function scrollTopPage(){
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* SHOW UP BUTTON */
+window.onscroll=function(){
+const btn=document.getElementById("topBtn");
+btn.style.display=document.documentElement.scrollTop>300?"block":"none";
+};
+
+
+/* CHARTS */
+
+let hrData=[];
+let spo2Data=[];
+let labels=[];
+
+const hrChart=new Chart(document.getElementById('hrChart'),{
+type:'line',
+data:{labels,datasets:[{data:hrData,borderColor:'#ff4d4d',tension:.4}]},
+options:{plugins:{legend:{display:false}},scales:{y:{min:50,max:130}}}
+});
+
+const spo2Chart=new Chart(document.getElementById('spo2Chart'),{
+type:'line',
+data:{labels,datasets:[{data:spo2Data,borderColor:'#4dff88',tension:.4}]},
+options:{plugins:{legend:{display:false}},scales:{y:{min:90,max:100}}}
+});
+
+
+function updateData(){
+fetch("/data")
+.then(res=>res.json())
+.then(data=>{
+
+document.getElementById("hr").innerText=`❤️ Heart Rate: ${data.heart_rate} bpm`;
+document.getElementById("bp").innerText=`🩸 Blood Pressure: ${data.bp}`;
+document.getElementById("spo2").innerText=`🫁 SpO₂: ${data.spo2}%`;
+document.getElementById("stress").innerText=`😌 Stress: ${data.stress}`;
+document.getElementById("clock").innerText=data.time;
+
+if(labels.length>10){
+labels.shift(); hrData.shift(); spo2Data.shift();
+}
+
+labels.push("");
+hrData.push(data.heart_rate);
+spo2Data.push(data.spo2);
+
+hrChart.update();
+spo2Chart.update();
+});
+}
+
+setInterval(updateData,5000);
+updateData();
+
+window.addEventListener("scroll",()=>{
+document.getElementById("navbar")
+.classList.toggle("scrolled",window.scrollY>20);
+});
+
+
+// active link indicator bar
+const links=document.querySelectorAll(".nav-item");
+const bar=document.querySelector(".active-bar");
+
+links.forEach(link=>{
+    link.addEventListener("mouseenter",e=>{
+        const rect=e.target.getBoundingClientRect();
+        const parent=e.target.parentElement.parentElement.getBoundingClientRect();
+        bar.style.width=rect.width+"px";
+        bar.style.left=(rect.left-parent.left)+"px";
+    });
+});
+
+// keep active page highlighted
+links.forEach(link=>{
+    if(link.href===window.location.href){
+        link.style.color="#00ffd5";
+    }
+});
+</script>
+
+</body>
+</html>

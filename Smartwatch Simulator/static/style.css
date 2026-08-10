@@ -1,0 +1,287 @@
+/* FIX HORIZONTAL SCROLL */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html, body{
+    overflow-x:hidden;
+    width:100%;
+}
+
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:radial-gradient(circle at top,#5aefd3,#cee9a0);
+color:white;
+}
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#0f2027;
+    z-index:999;
+
+    /* glow effect */
+    box-shadow:0 0 15px rgba(0,255,213,0.4);
+    border-bottom:1px solid rgba(0,255,213,0.2);
+}
+
+/* logo */
+.nav-logo{
+    font-size:20px;
+    font-weight:bold;
+    color:#eff4f3;
+    white-space:nowrap;
+    transition:.4s;
+}
+
+/* logo glow on hover */
+.nav-logo:hover{
+    color:#00ffd5;
+    text-shadow:
+        0 0 5px #00ffd5,
+        0 0 10px #00ffd5,
+        0 0 20px #00ffd5;
+}
+
+/* links */
+.nav-links{
+    list-style:none;
+    display:flex;
+    gap:25px;
+    flex-wrap:wrap;
+    font-family: Arial;
+}
+
+/* link style */
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    font-size:15px;
+    position:relative;
+    transition:.3s;
+}
+
+/* glowing underline animation */
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-5px;
+    width:0%;
+    height:2px;
+    background:#69f07b;
+    transition:.4s;
+}
+
+/* hover effects */
+.nav-links a:hover{
+    color:#00ffd5;
+    text-shadow:
+        0 0 5px #00ffd5,
+        0 0 10px #00ffd5;
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+section{
+    width:100%;
+    max-width:100%;
+}
+
+
+/* COMMON SECTION STYLE */
+.about-section,
+.features-section{
+    padding:90px 20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* ABOUT BOX */
+.about-box{
+    max-width:750px;
+    background:rgba(0,0,0,0.75);
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    color:white;
+    box-shadow:0 0 25px rgba(0,255,200,0.25);
+}
+
+.about-box h1{
+    color:#00ffd5;
+    margin-bottom:20px;
+}
+
+/* FEATURES BOX */
+.features-box{
+    max-width:500px;
+    background:rgba(0,0,0,0.8);
+    padding:35px;
+    border-radius:20px;
+    text-align:center;
+    color:white;
+    box-shadow:0 0 30px rgba(0,255,200,0.35);
+}
+
+.features-box h2{
+    color:#00ffd5;
+    margin-bottom:20px;
+}
+
+.features-box ul{
+    list-style:none;
+    padding:0;
+}
+
+.features-box li{
+    margin:12px 0;
+    font-size:16px;
+}
+
+.heading
+{
+    color: black;
+    font:bolder;
+}
+/* INTRO */
+.intro{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+.intro lottie-player{
+width:400px;
+height:400px;
+background:transparent;
+}
+
+
+.intro p{
+font-size:18px;
+width:70%;
+margin-top:20px;
+}
+
+.start-btn{
+margin-top:25px;
+padding:14px 30px;
+font-size:18px;
+border:none;
+border-radius:30px;
+background:#00ffe0;
+cursor:pointer;
+transition:.3s;
+}
+
+.start-btn:hover{
+transform:scale(1.1);
+background:#00ccaa;
+}
+
+/* WATCH */
+.watch{
+width:380px;
+padding:25px;
+border-radius:40px;
+background:rgba(20,20,30,0.9);
+box-shadow:0 0 20px #00ffe0,0 0 40px #00ffe0 inset;
+text-align:center;
+margin:120px auto;
+}
+
+.clock{
+font-size:22px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+h2{
+margin:0 0 15px;
+color:#00ffe0;
+}
+
+.vitals p{
+margin:5px 0;
+}
+
+.charts{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.chart-container{
+background:rgba(0,255,224,0.1);
+padding:10px;
+border-radius:15px;
+}
+
+.chart-container h3{
+margin:0 0 5px;
+font-size:14px;
+color:#00ffe0;
+}
+
+/* SCROLL BUTTON */
+.top-btn{
+position:fixed;
+bottom:30px;
+right:30px;
+background:#00ffe0;
+border:none;
+border-radius:50%;
+width:55px;
+height:55px;
+font-size:22px;
+cursor:pointer;
+display:none;
+box-shadow:0 0 15px #00ffe0;
+}
+
+.about-container{
+    margin-top:100px;
+    padding:40px 40px;
+    max-width:900px;
+    margin-left:auto;
+    margin-right:auto;
+    display:grid;
+    gap:25px;
+    text-align:center;
+    color:white;
+}
+
+.about-box
+{
+    background:#111;   /* solid color instead of transparent */
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 0 15px rgba(0,0,0,0.4);
+}
+.features-box{
+    background:#111;   /* solid color instead of transparent */
+    padding-left:30px;
+    border-radius:18px;
+    box-shadow:0 0 15px rgba(0,0,0,0.4);
+}
+.features
+{
+ align-items: center;
+ padding-left: 500px;
+}

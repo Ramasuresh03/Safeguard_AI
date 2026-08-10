@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="fs-page-wrap">
+
+  <!-- Header -->
+  <div class="fs-header">
+    <p class="fs-eyebrow">WHAT'S NEXT</p>
+    <h2 class="fs-title">Future <span class="fs-title-accent">Scope</span></h2>
+    <p class="fs-subtitle">The current system is just the beginning. Here's the roadmap to turn this prototype into a life-saving product used by millions.</p>
+  </div>
+
+  <!-- Feature Cards -->
+  <div class="fs-cards-grid">
+
+    <!--<div class="fs-card fsc-pink">
+      <div class="fsc-phase">Phase 1</div>
+      <div class="fsc-icon-wrap fsc-iw-pink">🛰️</div>
+      <h3 class="fsc-title">Live GPS Tracking</h3>
+      <p class="fsc-desc">Continuous real-time location sharing on an interactive map. One tap shows your exact coordinates to pre-approved guardian contacts with pinpoint accuracy.</p>
+      <div class="fsc-tags"><span>GPS Module</span><span>Google Maps API</span><span>IoT</span></div>
+    </div>
+
+    <div class="fs-card fsc-violet">
+      <div class="fsc-phase">Phase 1</div>
+      <div class="fsc-icon-wrap fsc-iw-violet">📲</div>
+      <h3 class="fsc-title">Emergency SMS &amp; Calls</h3>
+      <p class="fsc-desc">Automated multi-channel alerts — SMS, WhatsApp, and direct voice call — triggered instantly the moment the AI detects a genuine threat signal.</p>
+      <div class="fsc-tags"><span>Twilio</span><span>WhatsApp API</span><span>SMS</span></div>
+    </div>-->
+
+    <div class="fs-card fsc-teal">
+      <div class="fsc-phase">Phase 2</div>
+      <div class="fsc-icon-wrap fsc-iw-teal">🎙️</div>
+      <h3 class="fsc-title">Voice &amp; Gesture SOS</h3>
+      <p class="fsc-desc">Hands-free emergency activation — trigger an SOS with a secret keyword or a pre-defined wrist gesture pattern on the smart band, no phone needed.</p>
+      <div class="fsc-tags"><span>Wake Word</span><span>Gesture API</span><span>NLP</span></div>
+    </div>
+
+    <div class="fs-card fsc-amber">
+      <div class="fsc-phase">Phase 2</div>
+      <div class="fsc-icon-wrap fsc-iw-amber">📷</div>
+      <h3 class="fsc-title">Camera Evidence Capture</h3>
+      <p class="fsc-desc">Silent photo and video recording that uploads immediately to encrypted cloud storage, providing irrefutable evidence for law enforcement and authorities.</p>
+      <div class="fsc-tags"><span>Cloud Storage</span><span>Encryption</span><span>OpenCV</span></div>
+    </div>
+
+    <div class="fs-card fsc-blue">
+      <div class="fsc-phase">Phase 2</div>
+      <div class="fsc-icon-wrap fsc-iw-blue">⌚</div>
+      <h3 class="fsc-title">Smart Wearable Integration</h3>
+      <p class="fsc-desc">Native SDKs for Apple Watch, Fitbit, and Samsung Galaxy Watch — replacing the simulator with real hardware biometric streams for production-grade monitoring.</p>
+      <div class="fsc-tags"><span>WatchOS</span><span>Fitbit SDK</span><span>Galaxy SDK</span></div>
+    </div>
+
+    <div class="fs-card fsc-green">
+      <div class="fsc-phase">Phase 3</div>
+      <div class="fsc-icon-wrap fsc-iw-green">🤝</div>
+      <h3 class="fsc-title">Community Safe Zones</h3>
+      <p class="fsc-desc">Crowd-sourced mapping of safe locations — verified public spaces, police stations, and hospitals displayed on a live community heatmap updated in real time.</p>
+      <div class="fsc-tags"><span>Crowd-sourcing</span><span>Heatmap</span><span>Community</span></div>
+    </div>
+
+  </div>
+
+  <!-- Roadmap Timeline -->
+  <div class="fs-timeline-wrap">
+    <h3 class="fs-timeline-heading">Development Roadmap</h3>
+
+    <div class="fs-timeline">
+
+      <div class="fs-tl-item fstl-done">
+        <div class="fs-tl-dot fstl-dot-done">✓</div>
+        <div class="fs-tl-card">
+          <span class="fs-tl-tag fstl-tag-done">✅ LIVE NOW</span>
+          <h4>MVP — Core System</h4>
+          <p>AI biometric monitoring, Random Forest classifier, Flask REST API, real-time Guardian Dashboard with Chart.js live charts and SMS alerting via Twilio.</p>
+        </div>
+      </div>
+
+      <div class="fs-tl-item fstl-next">
+        <div class="fs-tl-dot fstl-dot-next">1</div>
+        <div class="fs-tl-card">
+          <span class="fs-tl-tag fstl-tag-next">🚧 NEXT UP</span>
+          <h4>Hardware + Alerts</h4>
+          <p>ESP32 smart band with real sensors, GPS module integration, automated Twilio SMS and WhatsApp alerts to guardian contacts on Emergency prediction.</p>
+        </div>
+      </div>
+
+      <div class="fs-tl-item fstl-future">
+        <div class="fs-tl-dot fstl-dot-future">2</div>
+        <div class="fs-tl-card">
+          <span class="fs-tl-tag fstl-tag-future">📐 IN DESIGN</span>
+          <h4>Mobile App &amp; Wearables</h4>
+          <p>React Native app for iOS/Android, HealthKit/Google Fit integration, voice keyword SOS activation, and silent camera evidence capture with encrypted upload.</p>
+        </div>
+      </div>
+
+      <div class="fs-tl-item fstl-future">
+        <div class="fs-tl-dot fstl-dot-future">3</div>
+        <div class="fs-tl-card">
+          <span class="fs-tl-tag fstl-tag-future">🌐 FUTURE</span>
+          <h4>Scale &amp; Community</h4>
+          <p>Cloud deployment on AWS, crowd-sourced safe-zone mapping, police dispatch integration, and government safety network connectivity across cities.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+{% endblock %}

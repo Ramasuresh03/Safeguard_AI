@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="error-page">
+  <!-- Decorative flowers -->
+  <span class="error-flowers f1">🌸</span>
+  <span class="error-flowers f2">🌺</span>
+  <span class="error-flowers f3">🌼</span>
+  <span class="error-flowers f4">💐</span>
+
+  <div class="error-404-num">404</div>
+  <div class="error-icon">🔍</div>
+  <h2 class="error-title">Page Not Found</h2>
+  <p class="error-msg">
+    Oops! The page you're looking for seems to have wandered off.
+    Don't worry — we're still here to keep you safe.
+  </p>
+  <div class="error-links">
+    <a href="/" class="btn-primary">🏠 Back to Home</a>
+    <a href="/about" class="btn-ghost">📖 About</a>
+  </div>
+</div>
+
+{% endblock %}
