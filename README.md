@@ -420,9 +420,6 @@ The system can be further enhanced with:
 * Real smartwatch integration
 * GPS-based real-time location tracking
 * Emergency SOS button
-* SMS alerts
-* Email notifications
-* WhatsApp/notification integration
 * Cloud-based IoT data storage
 * Mobile application
 * Real-time emergency contact notification
@@ -430,7 +427,6 @@ The system can be further enhanced with:
 * CCTV integration
 * Voice-based emergency detection
 * Geofencing
-* Automatic emergency service integration
 
 ---
 
